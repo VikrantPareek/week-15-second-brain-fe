@@ -25,18 +25,18 @@ export function Card(props: Styles) {
       <div className="flex flex-col items-center my-3">
         {props.type == "video" ? (
           <iframe
-            className="my-3 rounded-xl h-64"
+            className="my-3 rounded-xl h-64 outline-none border-none"
             width="100%"
             src={props.link.replace("youtu.be", "www.youtube.com/embed")}
             title="Dooron Dooron (Official Video) - Paresh Pahuja Feat. Harleen Sethi | Shiv | Meghdeep | Vaibhav"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           ></iframe>
         ) : (
-          <blockquote className="twitter-tweet">
+          <blockquote className="twitter-tweet outline-none border-none">
             <a href={props.link}></a>
           </blockquote>
         )}
-        <div className="flex flex-wrap gap-2">
+        <div className="flex self-start flex-wrap gap-2">
           {props.tags.map((e) => (
             <p className="bg-[#e0e7ff] text-[#5046e4] px-3 py-1 text-sm rounded-full">
               {"#" + e}

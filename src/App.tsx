@@ -1,44 +1,78 @@
+import { AddIcon } from "./components/AddIcon";
+import { Button } from "./components/Button";
 import { Card } from "./components/Card";
+import { ShareIcon } from "./components/ShareIcon";
+import { Sidebar } from "./components/Sidebar";
 
 function App() {
   return (
-    <div className="flex gap-3 m-5">
-      <Card
-        type="video"
-        tags={[
-          "VJHCVGC",
-          "ideas",
-          "ideas",
-          "ideas",
-          "ideas",
-          "ideas",
-          "ideas",
-          "ideas",
-          "ideas",
-          "ideas",
-          "ideas",
-        ]}
-        link="https://youtu.be/M5OCLifZK1w?list=RDM5OCLifZK1w"
-        topHeading="New Song"
-      />
-      <Card
-        type="tweet"
-        tags={[
-          "VJHCVGC",
-          "ideas",
-          "ideas",
-          "ideas",
-          "ideas",
-          "ideas",
-          "ideas",
-          "ideas",
-          "ideas",
-          "ideas",
-          "ideas",
-        ]}
-        link="https://x.com/VikrantPareek_/status/2037014368416829596?s=20"
-        topHeading="New Song"
-      />
+    <div className="flex">
+      <Sidebar />
+      <div className="px-7 ml-72 py-7 h-screen flex-1">
+        <div className="flex justify-between">
+          <p className="h-fit text-3xl font-bold">All Contents</p>
+          <div className="flex gap-4">
+            <Button icon={<ShareIcon />} text="Share Brain" color="secondary" />
+            <Button icon={<AddIcon />} text="Add Content" color="primary" />
+          </div>
+        </div>
+        <div className="mt-8 pb-12 flex flex-wrap gap-5 justify-center">
+          <Card
+            tags={["esfsef", "jseh"]}
+            type={"video"}
+            link="https://youtu.be/CGhGAVH2GqY?list=RDCGhGAVH2GqY"
+            topHeading="NEW VIRAL SONG"
+          />
+          <Card
+            tags={["esfsef", "jseh"]}
+            type={"tweet"}
+            link="https://x.com/VikrantPareek_/status/2037014368416829596?s=20"
+            topHeading="NEW VIRAL SONG"
+          />
+          <Card
+            tags={["esfsef", "jseh"]}
+            type={"tweet"}
+            link="https://x.com/VikrantPareek_/status/2037014368416829596?s=20"
+            topHeading="NEW VIRAL SONG"
+          />
+          <Card
+            tags={["esfsef", "jseh"]}
+            type={"video"}
+            link="https://youtu.be/CGhGAVH2GqY?list=RDCGhGAVH2GqY"
+            topHeading="NEW VIRAL SONG"
+          />
+          <Card
+            tags={["esfsef", "jseh"]}
+            type={"video"}
+            link="https://youtu.be/CGhGAVH2GqY?list=RDCGhGAVH2GqY"
+            topHeading="NEW VIRAL SONG"
+          />
+          <Card
+            tags={["esfsef", "jseh"]}
+            type={"video"}
+            link="https://youtu.be/CGhGAVH2GqY?list=RDCGhGAVH2GqY"
+            topHeading="NEW VIRAL SONG"
+          />
+          <Card
+            tags={["esfsef", "jseh"]}
+            type={"video"}
+            link="https://youtu.be/CGhGAVH2GqY?list=RDCGhGAVH2GqY"
+            topHeading="NEW VIRAL SONG"
+          />
+          <Card
+            tags={["esfsef", "jseh"]}
+            type={"video"}
+            link="https://youtu.be/CGhGAVH2GqY?list=RDCGhGAVH2GqY"
+            topHeading="NEW VIRAL SONG"
+          />
+          <Card
+            tags={["esfsef", "jseh"]}
+            type={"video"}
+            link="https://youtu.be/CGhGAVH2GqY?list=RDCGhGAVH2GqY"
+            topHeading="NEW VIRAL SONG"
+          />
+        </div>
+      </div>
     </div>
   );
 }

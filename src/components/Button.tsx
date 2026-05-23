@@ -17,12 +17,12 @@ let btnStyles: btnStyleInt = {
 };
 
 let defaultStyles = {
-  styles: "rounded-lg px-4 py-2 flex gap-2 items-center font-medium m-20",
+  styles: "rounded-lg px-4 py-2 w-fit h-fit flex gap-2 items-center font-medium",
 };
 
 export function Button(props: Styles) {
   return (
-    <button className={`${btnStyles[props.color]} ${defaultStyles.styles}`}>
+    <button className={`${btnStyles[props.color]} cursor-pointer ${defaultStyles.styles}`}>
       {props.icon}
       {props.text}
     </button>
