@@ -6,7 +6,6 @@ import { ShareIcon } from "./components/ShareIcon";
 import { ShareModal } from "./components/ShareModal";
 import { Sidebar } from "./components/Sidebar";
 import { SignIn } from "./components/SignIn";
-import { SignUp } from "./components/SignUp";
 
 function App() {
   return (
