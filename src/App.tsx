@@ -1,3 +1,4 @@
+import { AddContentModal } from "./components/AddContentModal";
 import { AddIcon } from "./components/AddIcon";
 import { Button } from "./components/Button";
 import { Card } from "./components/Card";
@@ -75,7 +76,7 @@ function App() {
     //     </div>
     //   </div>
     // </div>
-    <ShareModal/>
+    <AddContentModal/>
   );
 }
 
