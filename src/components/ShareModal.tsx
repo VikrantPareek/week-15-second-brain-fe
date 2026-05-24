@@ -1,0 +1,26 @@
+import { AddIcon } from "./AddIcon";
+import { Button } from "./Button";
+import { CopyIcon } from "./CopyIcon";
+
+export function ShareModal() {
+  return (
+    <div className="h-screen w-screen flex justify-center items-center bg-[#7d7d7d]">
+      <div className="w-96 px-6 rounded-lg py-6 bg-white">
+        <div className="flex items-center text-center justify-between">
+          <p className="text-lg font-semibold">Share Your Second Brain</p>
+          <AddIcon extraStyle="rotate-45" />
+        </div>
+        <p className="my-5 text-md">
+          Share your entire collection of tweets, and videos with others.
+          They'll be able to import your content into their own Second Brain.
+        </p>
+        <Button
+          extraStyle="w-full justify-center"
+          text="Share Brain"
+          color="primary"
+          icon={<CopyIcon />}
+        />
+      </div>
+    </div>
+  );
+}

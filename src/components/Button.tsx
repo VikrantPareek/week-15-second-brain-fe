@@ -3,7 +3,8 @@ import type { ReactElement } from "react";
 interface Styles {
   text: string;
   color: "primary" | "secondary";
-  icon: ReactElement;
+  icon?: ReactElement;
+  extraStyle?: string
 }
 
 interface btnStyleInt {
@@ -22,7 +23,7 @@ let defaultStyles = {
 
 export function Button(props: Styles) {
   return (
-    <button className={`${btnStyles[props.color]} cursor-pointer ${defaultStyles.styles}`}>
+    <button className={`${btnStyles[props.color]} ${props.extraStyle} cursor-pointer ${defaultStyles.styles}`}>
       {props.icon}
       {props.text}
     </button>
