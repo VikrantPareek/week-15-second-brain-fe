@@ -1,6 +1,10 @@
 interface Style{
-  extraStyle?: string
+  extraStyle?: string,
+  // isShare?: true| false,
+  // setIsShare?: Function,
+  // onClick?:()=>void 
 }
+
 
 export function AddIcon(props:Style) {
   return (

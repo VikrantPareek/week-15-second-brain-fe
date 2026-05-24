@@ -4,7 +4,8 @@ interface Styles {
   text: string;
   color: "primary" | "secondary";
   icon?: ReactElement;
-  extraStyle?: string
+  extraStyle?: string;
+  onClick?: () => void;
 }
 
 interface btnStyleInt {
@@ -18,12 +19,16 @@ let btnStyles: btnStyleInt = {
 };
 
 let defaultStyles = {
-  styles: "rounded-lg px-4 py-2 w-fit h-fit flex gap-2 items-center font-medium",
+  styles:
+    "rounded-lg px-4 py-2 w-fit h-fit flex gap-2 items-center font-medium",
 };
 
 export function Button(props: Styles) {
   return (
-    <button className={`${btnStyles[props.color]} ${props.extraStyle} cursor-pointer ${defaultStyles.styles}`}>
+    <button
+      onClick={props.onClick}
+      className={`${btnStyles[props.color]} ${props.extraStyle} cursor-pointer ${defaultStyles.styles}`}
+    >
       {props.icon}
       {props.text}
     </button>
