@@ -12,8 +12,8 @@ export function MainComponent() {
   interface contentType {
     type: "tweet" | "video";
     tags: string[];
-    link: string;
     title: string;
+    link: string;
     _id: string;
   }
 
