@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { SignUp } from "./components/SignUp";
-import { SharedContent } from "./components/SharedContent";
 import { SignIn } from "./components/SignIn";
+import { SharedContent } from "./components/SharedContent";
 import { MainComponent } from "./components/MainComponent";
 
 function App() {
