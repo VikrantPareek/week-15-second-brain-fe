@@ -1,7 +1,25 @@
+import { useRef } from "react";
 import { AddIcon } from "./AddIcon";
 import { Button } from "./Button";
+import axios from "axios";
+import { useNavigate, type NavigateFunction } from "react-router-dom";
 
 export function SignUp() {
+  let usernameRef = useRef<HTMLInputElement>(null);
+  let passwordRef = useRef<HTMLInputElement>(null);
+  let navigate:NavigateFunction = useNavigate();
+
+  async function sendReq() {
+    let username = usernameRef.current?.value;
+    let password = passwordRef.current?.value;
+    let response = await axios.post("http://localhost:3000/api/v1/signup", {
+      username,
+      password,
+    });
+    if (response.status == 200) {
+      navigate("/signin");
+    }
+  }
   return (
     <div className="h-screen w-screen flex justify-center items-center bg-[#7d7d7d]">
       <div className="w-sm px-6 rounded-lg py-6 bg-white">
@@ -15,6 +33,7 @@ export function SignUp() {
               Username:
             </label>
             <input
+              ref={usernameRef}
               type="text"
               id="Username"
               placeholder="Enter Username"
@@ -26,6 +45,7 @@ export function SignUp() {
               Password:
             </label>
             <input
+              ref={passwordRef}
               type="text"
               id="Password"
               placeholder="Enter Password"
@@ -34,6 +54,7 @@ export function SignUp() {
           </div>
         </div>
         <Button
+          onClick={sendReq}
           extraStyle="mx-auto justify-center"
           text="SignUp"
           color="primary"
