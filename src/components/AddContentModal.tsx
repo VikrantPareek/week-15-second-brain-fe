@@ -1,5 +1,7 @@
+import { useRef } from "react";
 import { AddIcon } from "./AddIcon";
 import { Button } from "./Button";
+import axios from "axios";
 
 interface extraStyle {
   isVisible: "true" | "false";
@@ -13,6 +15,38 @@ let styles = {
 };
 
 export function AddContentModal(props: extraStyle) {
+  let titleRef = useRef<HTMLInputElement>(null);
+  let tagsRef = useRef<HTMLInputElement>(null);
+  let linkRef = useRef<HTMLInputElement>(null);
+  let typeRef = useRef<HTMLInputElement>(null);
+
+  async function sendReq() {
+    let title = titleRef.current?.value;
+    let tags = tagsRef.current?.value;
+    let link = linkRef.current?.value;
+    let type = typeRef.current?.value;
+    let tagArr = tags?.split(" ").map((e) => e.trim());
+    let response = await axios.post(
+      "http://localhost:3000/api/v1/content",
+      {
+        title,
+        tags: tagArr,
+        link,
+        type,
+      },
+      {
+        headers: {
+          token: localStorage.getItem("token"),
+        },
+      },
+    );
+    console.log(response.data);
+    titleRef.current!.value = "";
+    tagsRef.current!.value = "";
+    linkRef.current!.value = "";
+    typeRef.current!.value = "";
+    props.setIsAdd();
+  }
   return (
     <div
       className={
@@ -33,6 +67,7 @@ export function AddContentModal(props: extraStyle) {
               Title:
             </label>
             <input
+              ref={titleRef}
               type="text"
               id="title"
               placeholder="Enter Title"
@@ -44,6 +79,7 @@ export function AddContentModal(props: extraStyle) {
               Type:
             </label>
             <input
+              ref={typeRef}
               type="text"
               id="Type"
               placeholder="Enter Type"
@@ -55,6 +91,7 @@ export function AddContentModal(props: extraStyle) {
               Link:
             </label>
             <input
+              ref={linkRef}
               type="text"
               id="Link"
               placeholder="Enter Link"
@@ -66,6 +103,7 @@ export function AddContentModal(props: extraStyle) {
               Tags:
             </label>
             <input
+              ref={tagsRef}
               type="text"
               id="Tags"
               placeholder="Enter Tags"
@@ -74,6 +112,7 @@ export function AddContentModal(props: extraStyle) {
           </div>
         </div>
         <Button
+          onClick={sendReq}
           extraStyle="mx-auto justify-center"
           text="Add Content"
           color="primary"
