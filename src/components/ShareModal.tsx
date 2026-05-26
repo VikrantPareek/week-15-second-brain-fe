@@ -1,11 +1,13 @@
+import axios from "axios";
 import { AddIcon } from "./AddIcon";
 import { Button } from "./Button";
 import { CopyIcon } from "./CopyIcon";
+import { useState } from "react";
 
 interface extraStyle {
   isVisible: "true" | "false";
-  isShare: true | false;
-  setIsShare: () => void;
+  isShared: true | false;
+  setIsShared: () => void;
 }
 
 let styles = {
@@ -14,6 +16,29 @@ let styles = {
 };
 
 export function ShareModal(props: extraStyle) {
+  let [isShared, setIsShared] = useState(false);
+  async function shareBrain() {
+    try {
+      let response = await axios.post(
+        "http://localhost:3000/api/v1/brain/share",
+        { share: !isShared },
+        { headers: { token: localStorage.getItem("token") } },
+      );
+      if (response.data.link != undefined) {
+        await navigator.clipboard.writeText(
+          "http://localhost:3000/api/v1/brain/" + response.data.link,
+        );
+        alert("Link copied!");
+      } else {
+        alert("Sharing Stopped!");
+      }
+      setIsShared(!isShared);
+      props.setIsShared?.();
+    } catch (e: any) {
+      alert(e.response.data.message + " Click again to stop sharing!");
+      setIsShared(!isShared);
+    }
+  }
   return (
     <div
       className={
@@ -24,7 +49,7 @@ export function ShareModal(props: extraStyle) {
       <div className="w-96 px-6 rounded-lg py-6 bg-white">
         <div className="flex items-center text-center justify-between">
           <p className="text-lg font-semibold">Share Your Second Brain</p>
-          <div onClick={props.setIsShare} className="mt-1">
+          <div onClick={props.setIsShared} className="mt-1">
             <AddIcon extraStyle="rotate-45" />
           </div>
         </div>
@@ -33,8 +58,9 @@ export function ShareModal(props: extraStyle) {
           They'll be able to import your content into their own Second Brain.
         </p>
         <Button
+          onClick={shareBrain}
           extraStyle="w-full justify-center"
-          text="Share Brain"
+          text={"Start/Stop Share Brain"}
           color="primary"
           icon={<CopyIcon />}
         />

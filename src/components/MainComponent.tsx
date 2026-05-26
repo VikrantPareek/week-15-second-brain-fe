@@ -69,8 +69,8 @@ export function MainComponent() {
         </div>
       </div>
       <ShareModal
-        setIsShare={() => setIsShare(!isShare)}
-        isShare={isShare}
+        setIsShared={() => setIsShare(!isShare)}
+        isShared={isShare}
         isVisible={`${isShare}`}
       />
       <AddContentModal
