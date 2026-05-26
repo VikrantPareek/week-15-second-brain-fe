@@ -26,9 +26,9 @@ export function ShareModal(props: extraStyle) {
       );
       if (response.data.link != undefined) {
         await navigator.clipboard.writeText(
-          "http://localhost:3000/api/v1/brain/" + response.data.link,
+          "http://localhost:5173/brain/" + response.data.link,
         );
-        alert("Link copied!");
+        alert("Link copied!" + " http://localhost:5173/brain/" + response.data.link);
       } else {
         alert("Sharing Stopped!");
       }
