@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AddIcon } from "./AddIcon";
 import { Button } from "./Button";
 import { Card } from "./Card";
@@ -6,10 +6,34 @@ import { ShareIcon } from "./ShareIcon";
 import { ShareModal } from "./ShareModal";
 import { Sidebar } from "./Sidebar";
 import { AddContentModal } from "./AddContentModal";
+import axios from "axios";
 
 export function MainComponent() {
+  interface contentType {
+    type: "tweet" | "video";
+    tags: string[];
+    link: string;
+    title: string;
+    _id: string;
+  }
+
   let [isShare, setIsShare] = useState(false);
   let [isAdd, setIsAdd] = useState(false);
+  let [content, setContent] = useState<contentType[]>([]);
+
+  async function fetch() {
+    let response = await axios.get("http://localhost:3000/api/v1/content", {
+      headers: {
+        token: localStorage.getItem("token"),
+      },
+    });
+    setContent(response.data.content);
+  }
+
+  useEffect(() => {
+    fetch();
+  }, []);
+
   return (
     <div className="flex">
       <Sidebar />
@@ -32,60 +56,16 @@ export function MainComponent() {
           </div>
         </div>
         <div className="mt-8 pb-12 flex flex-wrap gap-5 justify-center">
-          <Card
-            tags={["esfsef", "jseh"]}
-            type={"video"}
-            link="https://youtu.be/CGhGAVH2GqY?list=RDCGhGAVH2GqY"
-            topHeading="NEW VIRAL SONG"
-          />
-          <Card
-            tags={["esfsef", "jseh"]}
-            type={"tweet"}
-            link="https://x.com/VikrantPareek_/status/2037014368416829596?s=20"
-            topHeading="NEW VIRAL SONG"
-          />
-          <Card
-            tags={["esfsef", "jseh"]}
-            type={"tweet"}
-            link="https://x.com/VikrantPareek_/status/2037014368416829596?s=20"
-            topHeading="NEW VIRAL SONG"
-          />
-          <Card
-            tags={["esfsef", "jseh"]}
-            type={"video"}
-            link="https://youtu.be/CGhGAVH2GqY?list=RDCGhGAVH2GqY"
-            topHeading="NEW VIRAL SONG"
-          />
-          <Card
-            tags={["esfsef", "jseh"]}
-            type={"video"}
-            link="https://youtu.be/CGhGAVH2GqY?list=RDCGhGAVH2GqY"
-            topHeading="NEW VIRAL SONG"
-          />
-          <Card
-            tags={["esfsef", "jseh"]}
-            type={"video"}
-            link="https://youtu.be/CGhGAVH2GqY?list=RDCGhGAVH2GqY"
-            topHeading="NEW VIRAL SONG"
-          />
-          <Card
-            tags={["esfsef", "jseh"]}
-            type={"video"}
-            link="https://youtu.be/CGhGAVH2GqY?list=RDCGhGAVH2GqY"
-            topHeading="NEW VIRAL SONG"
-          />
-          <Card
-            tags={["esfsef", "jseh"]}
-            type={"video"}
-            link="https://youtu.be/CGhGAVH2GqY?list=RDCGhGAVH2GqY"
-            topHeading="NEW VIRAL SONG"
-          />
-          <Card
-            tags={["esfsef", "jseh"]}
-            type={"video"}
-            link="https://youtu.be/CGhGAVH2GqY?list=RDCGhGAVH2GqY"
-            topHeading="NEW VIRAL SONG"
-          />
+          {content.map((e) => (
+            <Card
+              fetch={fetch}
+              tags={e.tags}
+              type={e.type}
+              link={e.link}
+              _id={e._id}
+              topHeading={e.title}
+            />
+          ))}
         </div>
       </div>
       <ShareModal
@@ -94,6 +74,7 @@ export function MainComponent() {
         isVisible={`${isShare}`}
       />
       <AddContentModal
+        fetcher={fetch}
         setIsAdd={() => setIsAdd(!isAdd)}
         isAdd={isAdd}
         isVisible={`${isAdd}`}

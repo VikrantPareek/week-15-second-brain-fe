@@ -2,15 +2,31 @@ import { ShareIcon } from "./ShareIcon";
 import { DeleteIcon } from "./DeleteIcon";
 import { TwitterIcon } from "./TwitterIcon";
 import { YoutubeIcon } from "./YoutubeIcon";
+import axios from "axios";
 
 interface Styles {
   topHeading: string;
   type: "tweet" | "video";
   link: string;
   tags: string[];
+  _id: string;
+  fetch?: () => void;
 }
 
 export function Card(props: Styles) {
+  async function onDelete() {
+    let contentId = props._id;
+    await axios.delete("http://localhost:3000/api/v1/content", {
+      data: {
+        contentId,
+      },
+      headers: {
+        token: localStorage.getItem("token"),
+      },
+    });
+    props.fetch?.();
+  }
+
   return (
     <div className="border-2 rounded-xl border-md border-[#e5e7e8] max-w-96 h-fit w-fit px-5 py-4">
       <div className="flex items-center justify-between gap-20">
@@ -19,7 +35,7 @@ export function Card(props: Styles) {
           {props.topHeading}
         </div>
         <div className="flex gap-3">
-          <ShareIcon /> {<DeleteIcon />}
+          <ShareIcon /> {<DeleteIcon onclick={() => onDelete()} />}
         </div>
       </div>
       <div className="flex flex-col items-center my-3">

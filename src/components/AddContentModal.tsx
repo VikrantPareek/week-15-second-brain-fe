@@ -7,6 +7,7 @@ interface extraStyle {
   isVisible: "true" | "false";
   isAdd: true | false;
   setIsAdd: () => void;
+  fetcher?: () => {};
 }
 
 let styles = {
@@ -24,9 +25,9 @@ export function AddContentModal(props: extraStyle) {
     let title = titleRef.current?.value;
     let tags = tagsRef.current?.value;
     let link = linkRef.current?.value;
-    let type = typeRef.current?.value;
+    let type = typeRef.current?.value.toLocaleLowerCase();
     let tagArr = tags?.split(" ").map((e) => e.trim());
-    let response = await axios.post(
+    await axios.post(
       "http://localhost:3000/api/v1/content",
       {
         title,
@@ -40,12 +41,12 @@ export function AddContentModal(props: extraStyle) {
         },
       },
     );
-    console.log(response.data);
     titleRef.current!.value = "";
     tagsRef.current!.value = "";
     linkRef.current!.value = "";
     typeRef.current!.value = "";
     props.setIsAdd();
+    props.fetcher?.();
   }
   return (
     <div
