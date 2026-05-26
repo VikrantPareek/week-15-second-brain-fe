@@ -22,10 +22,10 @@ export function AddContentModal(props: extraStyle) {
   let typeRef = useRef<HTMLInputElement>(null);
 
   async function sendReq() {
-    let title = titleRef.current?.value;
-    let tags = tagsRef.current?.value;
-    let link = linkRef.current?.value;
-    let type = typeRef.current?.value.toLocaleLowerCase();
+    let title = titleRef.current?.value.trim();
+    let tags = tagsRef.current?.value.trim();
+    let link = linkRef.current?.value.trim();
+    let type = typeRef.current?.value.toLocaleLowerCase().trim();
     let tagArr = tags?.split(" ").map((e) => e.trim());
     await axios.post(
       "http://localhost:3000/api/v1/content",
